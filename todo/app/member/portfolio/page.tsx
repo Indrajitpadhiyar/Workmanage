@@ -230,7 +230,7 @@ export default function MemberPortfolioPage() {
                   </div>
                   <div>
                     <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{stat.label}</p>
-                    <h3 className="text-2xl font-black text-[#003631]">{stat.value}</h3>
+                    <h3 className="text-2xl font-black text-white">{stat.value}</h3>
                   </div>
                 </CardContent>
               </Card>
