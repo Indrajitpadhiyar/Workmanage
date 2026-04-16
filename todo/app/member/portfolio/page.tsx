@@ -21,10 +21,10 @@ export default function MemberPortfolioPage() {
 
       try {
         const [profileRes, tasksRes] = await Promise.all([
-          fetch('http://localhost:8000/api/auth/profile', {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile`, {
             headers: { 'Authorization': `Bearer ${token}` }
           }),
-          fetch('http://localhost:8000/api/tasks/my', {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/my`, {
             headers: { 'Authorization': `Bearer ${token}` }
           })
         ]);

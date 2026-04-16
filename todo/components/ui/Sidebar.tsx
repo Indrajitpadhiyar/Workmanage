@@ -61,10 +61,10 @@ export function Sidebar({ role }: SidebarProps) {
       )}>
         <div className="p-8 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-[#FFEDA8] flex items-center justify-center text-[#003631] font-black text-2xl shadow-lg">
-              T
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg overflow-hidden bg-white/10 border border-white/20 p-1">
+              <img src="/logo.png" alt="IDR TaskFlow Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="text-xl font-black tracking-tight">TaskManage</span>
+            <span className="text-xl font-black tracking-tight">IDR TaskFlow</span>
           </div>
           <button
             onClick={close}

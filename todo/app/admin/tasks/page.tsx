@@ -22,13 +22,13 @@ export default function AdminTasksPage() {
     const token = localStorage.getItem('token');
     try {
       // Fetch tasks
-      const tasksRes = await fetch('http://localhost:8000/api/tasks/all', {
+      const tasksRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/all`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const tasksData = await tasksRes.json();
       
       // Fetch users
-      const usersRes = await fetch('http://localhost:8000/api/auth/users', {
+      const usersRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const usersData = await usersRes.json();
@@ -47,7 +47,7 @@ export default function AdminTasksPage() {
     
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:8000/api/tasks/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

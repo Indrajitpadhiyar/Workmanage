@@ -18,7 +18,7 @@ export default function MemberTasksPage() {
   const fetchTasks = async () => {
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch('http://localhost:8000/api/tasks/my', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/my`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();

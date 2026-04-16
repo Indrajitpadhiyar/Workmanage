@@ -30,10 +30,10 @@ export default function AdminMemberProfilePage() {
 
       try {
         const [memberRes, tasksRes] = await Promise.all([
-          fetch(`http://localhost:8000/api/auth/users/${memberId}`, {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/users/${memberId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           }),
-          fetch(`http://localhost:8000/api/tasks/all`, {
+          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/all`, {
             headers: { 'Authorization': `Bearer ${token}` }
           })
         ]);

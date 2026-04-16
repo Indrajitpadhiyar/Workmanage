@@ -29,7 +29,7 @@ export default function ProfilePage() {
         }
 
         try {
-            const res = await fetch('http://localhost:8000/api/auth/profile', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -87,7 +87,7 @@ export default function ProfilePage() {
 
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:8000/api/auth/profile', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ export default function ProfilePage() {
         formData.append('avatar', file);
 
         try {
-            const res = await fetch('http://localhost:8000/api/auth/profile/avatar', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile/avatar`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formData

@@ -18,13 +18,13 @@ export default function MemberDashboardPage() {
     const token = localStorage.getItem('token');
     try {
       // Fetch profile
-      const userRes = await fetch('http://localhost:8000/api/auth/profile', {
+      const userRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const userData = await userRes.json();
       
       // Fetch my tasks
-      const tasksRes = await fetch('http://localhost:8000/api/tasks/my', {
+      const tasksRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/my`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const tasksData = await tasksRes.json();

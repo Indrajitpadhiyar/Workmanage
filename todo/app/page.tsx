@@ -8,9 +8,8 @@ export default function Home() {
         <div className="w-16 h-16 bg-[#003631] text-[#FFEDA8] rounded-2xl mx-auto flex items-center justify-center text-3xl font-bold mb-6">
           T
         </div>
-        <h1 className="text-3xl font-bold text-[#003631] mb-2">TaskManage</h1>
+        <h1 className="text-3xl font-bold text-[#003631] mb-2">IDR TaskFlow</h1>
         <p className="text-gray-500 mb-8 text-sm">Select your demo environment</p>
-        
         <div className="space-y-4">
           <Link href="/login" className="block w-full bg-[#003631] text-white rounded-xl py-3.5 font-semibold shadow-md hover:bg-[#003631]/90 transition-colors">
             Login
