@@ -93,7 +93,9 @@ export default function LoginPage() {
                                 <div className="space-y-1.5">
                                     <div className="flex items-center justify-between ml-1">
                                         <label className="text-[13px] font-semibold text-gray-700">Password</label>
-                                        <Link href="#" className="text-xs text-gray-400 hover:text-[#003631] transition-colors">Forgot password?</Link>
+                                        <button type="button" className="text-xs text-gray-400 hover:text-[#003631] transition-colors">
+                                            Forgot password?
+                                        </button>
                                     </div>
                                     <div className="relative group">
                                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-[#003631] transition-colors">
