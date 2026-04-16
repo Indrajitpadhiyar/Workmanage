@@ -13,9 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Task Management System",
+  title: "IDR TaskFlow",
   description: "Enterprise task manager",
-  manifest: "/manifest.json"
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/logo.png"
+  }
 };
 
 import { SidebarProvider } from "@/lib/context/SidebarContext";
