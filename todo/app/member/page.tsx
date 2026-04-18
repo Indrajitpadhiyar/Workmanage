@@ -19,7 +19,6 @@ export default function MemberDashboardPage() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
-    try {
       // Fetch profile
       const userRes = await fetch(`${API_URL}/api/auth/profile`, {
         headers: { 'Authorization': `Bearer ${token}` },
@@ -42,6 +41,7 @@ export default function MemberDashboardPage() {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     fetchData();
@@ -195,4 +195,5 @@ export default function MemberDashboardPage() {
       </main>
     </>
   );
+
 }
