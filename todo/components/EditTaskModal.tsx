@@ -58,12 +58,14 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, u
         const token = localStorage.getItem('token');
 
         try {
-            const res = await fetch(`http://localhost:8000/api/tasks/${task._id}`, {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+            const res = await fetch(`${apiUrl}/api/tasks/${task._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+                credentials: 'include',
                 body: JSON.stringify({ title, description, assignee, status })
             });
 

@@ -22,8 +22,10 @@ export function Header({ title, showBack }: HeaderProps) {
     if (!token) return;
 
     try {
-      const res = await fetch('http://localhost:8000/api/notifications', {
-        headers: { 'Authorization': `Bearer ${token}` }
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/api/notifications`, {
+        headers: { 'Authorization': `Bearer ${token}` },
+        credentials: 'include'
       });
       const data = await res.json();
       if (Array.isArray(data)) {
@@ -37,9 +39,11 @@ export function Header({ title, showBack }: HeaderProps) {
   const markAllAsRead = async () => {
     const token = localStorage.getItem('token');
     try {
-      await fetch('http://localhost:8000/api/notifications/mark-all', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      await fetch(`${apiUrl}/api/notifications/mark-all`, {
         method: 'PUT',
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { 'Authorization': `Bearer ${token}` },
+        credentials: 'include'
       });
       setNotifications(notifications.map(n => ({ ...n, isRead: true })));
     } catch (error) {

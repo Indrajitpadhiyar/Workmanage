@@ -29,8 +29,10 @@ export default function ProfilePage() {
         }
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+            const res = await fetch(`${apiUrl}/api/auth/profile`, {
+                headers: { 'Authorization': `Bearer ${token}` },
+                credentials: 'include'
             });
             const data = await res.json();
             if (res.ok) {
@@ -87,12 +89,14 @@ export default function ProfilePage() {
 
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile`, {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+            const res = await fetch(`${apiUrl}/api/auth/profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+                credentials: 'include',
                 body: JSON.stringify(formData)  // includes githubUsername
             });
             const data = await res.json();
@@ -131,9 +135,11 @@ export default function ProfilePage() {
         formData.append('avatar', file);
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile/avatar`, {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+            const res = await fetch(`${apiUrl}/api/auth/profile/avatar`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
+                credentials: 'include',
                 body: formData
             });
             const data = await res.json();

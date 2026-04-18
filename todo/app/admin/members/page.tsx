@@ -22,8 +22,10 @@ export default function AdminMembersPage() {
   const fetchMembers = async () => {
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/users`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/api/auth/users`, {
+        headers: { 'Authorization': `Bearer ${token}` },
+        credentials: 'include'
       });
       const data = await res.json();
       if (Array.isArray(data)) {
@@ -54,12 +56,14 @@ export default function AdminMembersPage() {
 
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/users/${editingMember._id}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/api/auth/users/${editingMember._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
+        credentials: 'include',
         body: JSON.stringify(editFormData)
       });
       

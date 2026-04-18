@@ -20,12 +20,15 @@ export default function MemberPortfolioPage() {
       if (!token) { router.push('/login'); return; }
 
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
         const [profileRes, tasksRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/profile`, {
-            headers: { 'Authorization': `Bearer ${token}` }
+          fetch(`${apiUrl}/api/auth/profile`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+            credentials: 'include'
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/my`, {
-            headers: { 'Authorization': `Bearer ${token}` }
+          fetch(`${apiUrl}/api/tasks/my`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+            credentials: 'include'
           })
         ]);
 

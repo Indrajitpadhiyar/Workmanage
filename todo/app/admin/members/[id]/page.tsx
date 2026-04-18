@@ -29,12 +29,15 @@ export default function AdminMemberProfilePage() {
       if (!token) return;
 
       try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
         const [memberRes, tasksRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/users/${memberId}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
+          fetch(`${apiUrl}/api/auth/users/${memberId}`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+            credentials: 'include'
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/all`, {
-            headers: { 'Authorization': `Bearer ${token}` }
+          fetch(`${apiUrl}/api/tasks/all`, {
+            headers: { 'Authorization': `Bearer ${token}` },
+            credentials: 'include'
           })
         ]);
 

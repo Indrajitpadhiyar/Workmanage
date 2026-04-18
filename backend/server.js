@@ -4,6 +4,7 @@ dotenv.config();
 import connectDB from "./src/config/db.js";
 import dns from "dns";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
@@ -11,17 +12,23 @@ import authRoutes from "./src/routes/auth.routes.js";
 import taskRoutes from "./src/routes/task.routes.js";
 import notificationRoutes from "./src/routes/notification.routes.js";
 
-dotenv.config();
 const app = express();
 connectDB();
 
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use("/uploads", express.static("uploads"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/notifications", notificationRoutes);
+
 // Error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);

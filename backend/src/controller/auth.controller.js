@@ -54,9 +54,16 @@ export const login = async (req, res) => {
             { expiresIn: "1d" }
         );
 
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "none",
+            maxAge: 24 * 60 * 60 * 1000 // 1 day
+        });
+
         res.status(200).json({
             message: "Login successful",
-            token,
+            token, // Keep sending token in body for backward compatibility
             user: {
                 id: user._id,
                 name: user.name,
@@ -69,6 +76,15 @@ export const login = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: "Login failed", error: error.message });
     }
+};
+
+export const logout = async (req, res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "none"
+    });
+    res.status(200).json({ message: "Logout successful" });
 };
 export const getProfile = async (req, res) => {
     try {

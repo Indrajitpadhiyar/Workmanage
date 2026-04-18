@@ -18,8 +18,10 @@ export default function MemberTasksPage() {
   const fetchTasks = async () => {
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/my`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/api/tasks/my`, {
+        headers: { 'Authorization': `Bearer ${token}` },
+        credentials: 'include'
       });
       const data = await res.json();
       if (Array.isArray(data)) {

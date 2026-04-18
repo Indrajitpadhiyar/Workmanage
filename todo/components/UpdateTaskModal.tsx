@@ -34,12 +34,14 @@ export const UpdateTaskModal: React.FC<UpdateTaskModalProps> = ({ isOpen, onClos
 
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:8000/api/tasks/${task._id}/status`, {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+            const res = await fetch(`${apiUrl}/api/tasks/${task._id}/status`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
+                credentials: 'include',
                 body: JSON.stringify({ status, remarks })
             });
 

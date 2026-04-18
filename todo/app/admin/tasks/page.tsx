@@ -21,15 +21,18 @@ export default function AdminTasksPage() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
       // Fetch tasks
-      const tasksRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/all`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+      const tasksRes = await fetch(`${apiUrl}/api/tasks/all`, {
+        headers: { 'Authorization': `Bearer ${token}` },
+        credentials: 'include'
       });
       const tasksData = await tasksRes.json();
       
       // Fetch users
-      const usersRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/users`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+      const usersRes = await fetch(`${apiUrl}/api/auth/users`, {
+        headers: { 'Authorization': `Bearer ${token}` },
+        credentials: 'include'
       });
       const usersData = await usersRes.json();
 
@@ -47,9 +50,11 @@ export default function AdminTasksPage() {
     
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/tasks/${id}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/api/tasks/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { 'Authorization': `Bearer ${token}` },
+        credentials: 'include'
       });
       if (res.ok) {
         fetchData();
