@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Search, Bell, CheckCircle2, Clock, Menu, ArrowLeft } from 'lucide-react';
 import { useSidebar } from '@/lib/context/SidebarContext';
 import { useRouter } from 'next/navigation';
+import { API_URL } from '@/lib/api-config';
+
 
 interface HeaderProps {
   title: string;
@@ -22,9 +24,7 @@ export function Header({ title, showBack }: HeaderProps) {
     if (!token) return;
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      console.log('Fetching notifications from:', `${apiUrl}/api/notifications`);
-      const res = await fetch(`${apiUrl}/api/notifications`, {
+      const res = await fetch(`${API_URL}/api/notifications`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });
@@ -33,16 +33,14 @@ export function Header({ title, showBack }: HeaderProps) {
         setNotifications(data);
       }
     } catch (error) {
-      console.error('Error fetching notifications (network error?):', error);
-      console.log('Current API_URL:', process.env.NEXT_PUBLIC_API_URL);
+      console.error('Error fetching notifications:', error);
     }
   };
 
   const markAllAsRead = async () => {
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      await fetch(`${apiUrl}/api/notifications/mark-all`, {
+      await fetch(`${API_URL}/api/notifications/mark-all`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'

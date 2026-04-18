@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Link2, ExternalLink, CheckSquare, Clock, TrendingUp, Loader2, AlertCircle } from 'lucide-react';
@@ -20,13 +22,12 @@ export default function MemberPortfolioPage() {
       if (!token) { router.push('/login'); return; }
 
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
         const [profileRes, tasksRes] = await Promise.all([
-          fetch(`${apiUrl}/api/auth/profile`, {
+          fetch(`${API_URL}/api/auth/profile`, {
             headers: { 'Authorization': `Bearer ${token}` },
             credentials: 'include'
           }),
-          fetch(`${apiUrl}/api/tasks/my`, {
+          fetch(`${API_URL}/api/tasks/my`, {
             headers: { 'Authorization': `Bearer ${token}` },
             credentials: 'include'
           })

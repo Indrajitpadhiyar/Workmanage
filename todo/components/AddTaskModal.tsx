@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { X, Plus, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { API_URL } from '@/lib/api-config';
+
 
 interface User {
     _id: string;
@@ -41,8 +43,7 @@ export const AddTaskModal: React.FC<AddTaskModalProps> = ({ isOpen, onClose, use
         }
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-            const res = await fetch(`${apiUrl}/api/tasks`, {
+            const res = await fetch(`${API_URL}/api/tasks`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Camera, User, Mail, Shield, Loader2, CheckCircle2, AlertCircle, Link2, MonitorSmartphone } from 'lucide-react';
@@ -29,8 +31,7 @@ export default function ProfilePage() {
         }
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-            const res = await fetch(`${apiUrl}/api/auth/profile`, {
+            const res = await fetch(`${API_URL}/api/auth/profile`, {
                 headers: { 'Authorization': `Bearer ${token}` },
                 credentials: 'include'
             });
@@ -89,8 +90,7 @@ export default function ProfilePage() {
 
         const token = localStorage.getItem('token');
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-            const res = await fetch(`${apiUrl}/api/auth/profile`, {
+            const res = await fetch(`${API_URL}/api/auth/profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -135,8 +135,7 @@ export default function ProfilePage() {
         formData.append('avatar', file);
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-            const res = await fetch(`${apiUrl}/api/auth/profile/avatar`, {
+            const res = await fetch(`${API_URL}/api/auth/profile/avatar`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 credentials: 'include',

@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Search, Mail, Edit2, Loader2, X, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -22,8 +24,7 @@ export default function AdminMembersPage() {
   const fetchMembers = async () => {
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const res = await fetch(`${apiUrl}/api/auth/users`, {
+      const res = await fetch(`${API_URL}/api/auth/users`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });
@@ -56,8 +57,7 @@ export default function AdminMembersPage() {
 
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const res = await fetch(`${apiUrl}/api/auth/users/${editingMember._id}`, {
+      const res = await fetch(`${API_URL}/api/auth/users/${editingMember._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

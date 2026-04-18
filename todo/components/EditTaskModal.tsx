@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { X, Save, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { API_URL } from '@/lib/api-config';
+
 
 interface User {
     _id: string;
@@ -58,8 +60,7 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({ isOpen, onClose, u
         const token = localStorage.getItem('token');
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-            const res = await fetch(`${apiUrl}/api/tasks/${task._id}`, {
+            const res = await fetch(`${API_URL}/api/tasks/${task._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { User, Mail, Lock, Key, ArrowRight, ShieldCheck, UserCircle } from 'lucide-react';
+import { API_URL } from '@/lib/api-config';
+
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -30,7 +32,7 @@ export default function RegisterPage() {
         setSuccess('');
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/auth/register`, {
+            const res = await fetch(`${API_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

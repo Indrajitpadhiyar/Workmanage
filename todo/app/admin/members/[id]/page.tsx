@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import {
@@ -29,13 +31,12 @@ export default function AdminMemberProfilePage() {
       if (!token) return;
 
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
         const [memberRes, tasksRes] = await Promise.all([
-          fetch(`${apiUrl}/api/auth/users/${memberId}`, {
+          fetch(`${API_URL}/api/auth/users/${memberId}`, {
             headers: { 'Authorization': `Bearer ${token}` },
             credentials: 'include'
           }),
-          fetch(`${apiUrl}/api/tasks/all`, {
+          fetch(`${API_URL}/api/tasks/all`, {
             headers: { 'Authorization': `Bearer ${token}` },
             credentials: 'include'
           })

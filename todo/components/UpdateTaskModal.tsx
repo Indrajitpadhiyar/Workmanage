@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { X, CheckCircle2, AlertCircle, Send, Loader2 } from 'lucide-react';
+import { API_URL } from '@/lib/api-config';
+
 import { Button } from '@/components/ui/Button';
 
 interface Task {
@@ -34,8 +36,7 @@ export const UpdateTaskModal: React.FC<UpdateTaskModalProps> = ({ isOpen, onClos
 
         const token = localStorage.getItem('token');
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-            const res = await fetch(`${apiUrl}/api/tasks/${task._id}/status`, {
+            const res = await fetch(`${API_URL}/api/tasks/${task._id}/status`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

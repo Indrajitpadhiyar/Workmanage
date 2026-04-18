@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import { DashboardChart } from '@/components/ui/DashboardChart';
 import { Users, CheckCircle2, Clock, AlertCircle, Loader2 } from 'lucide-react';
@@ -15,14 +17,13 @@ export default function AdminDashboardPage() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const tasksRes = await fetch(`${apiUrl}/api/tasks/all`, {
+      const tasksRes = await fetch(`${API_URL}/api/tasks/all`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });
       const tasksData = await tasksRes.json();
 
-      const membersRes = await fetch(`${apiUrl}/api/auth/users`, {
+      const membersRes = await fetch(`${API_URL}/api/auth/users`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });

@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -21,16 +23,15 @@ export default function AdminTasksPage() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
       // Fetch tasks
-      const tasksRes = await fetch(`${apiUrl}/api/tasks/all`, {
+      const tasksRes = await fetch(`${API_URL}/api/tasks/all`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });
       const tasksData = await tasksRes.json();
       
       // Fetch users
-      const usersRes = await fetch(`${apiUrl}/api/auth/users`, {
+      const usersRes = await fetch(`${API_URL}/api/auth/users`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });
@@ -50,8 +51,7 @@ export default function AdminTasksPage() {
     
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const res = await fetch(`${apiUrl}/api/tasks/${id}`, {
+      const res = await fetch(`${API_URL}/api/tasks/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'

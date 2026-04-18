@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card, CardContent } from '@/components/ui/Card';
 import { CheckCircle2, Clock, PlayCircle, AlertTriangle, Loader2, ArrowRight } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
@@ -17,16 +19,16 @@ export default function MemberDashboardPage() {
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    try {
       // Fetch profile
-      const userRes = await fetch(`${apiUrl}/api/auth/profile`, {
+      const userRes = await fetch(`${API_URL}/api/auth/profile`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });
       const userData = await userRes.json();
       
       // Fetch my tasks
-      const tasksRes = await fetch(`${apiUrl}/api/tasks/my`, {
+      const tasksRes = await fetch(`${API_URL}/api/tasks/my`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });

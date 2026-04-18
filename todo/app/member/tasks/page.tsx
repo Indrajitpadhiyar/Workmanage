@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/ui/Header';
+import { API_URL } from '@/lib/api-config';
+
 import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -18,8 +20,7 @@ export default function MemberTasksPage() {
   const fetchTasks = async () => {
     const token = localStorage.getItem('token');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const res = await fetch(`${apiUrl}/api/tasks/my`, {
+      const res = await fetch(`${API_URL}/api/tasks/my`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
       });
