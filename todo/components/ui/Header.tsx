@@ -23,6 +23,7 @@ export function Header({ title, showBack }: HeaderProps) {
 
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      console.log('Fetching notifications from:', `${apiUrl}/api/notifications`);
       const res = await fetch(`${apiUrl}/api/notifications`, {
         headers: { 'Authorization': `Bearer ${token}` },
         credentials: 'include'
@@ -32,7 +33,8 @@ export function Header({ title, showBack }: HeaderProps) {
         setNotifications(data);
       }
     } catch (error) {
-      console.error('Error fetching notifications:', error);
+      console.error('Error fetching notifications (network error?):', error);
+      console.log('Current API_URL:', process.env.NEXT_PUBLIC_API_URL);
     }
   };
 
