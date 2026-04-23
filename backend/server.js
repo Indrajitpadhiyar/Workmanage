@@ -19,6 +19,7 @@ app.use(express.json());
 app.use(cookieParser());
 const allowedOrigins = [
     process.env.FRONTEND_URL,
+    "https://workmanage-6jej.onrender.com",
     "http://localhost:3000",
     "http://localhost:5173",
     "http://127.0.0.1:3000",

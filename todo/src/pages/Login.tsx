@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, LogIn } from 'lucide-react';
-import { API_URL } from '@/lib/api-config';
+import { getApiUrl } from '@/lib/api-config';
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function LoginPage() {
         setError('');
 
         try {
-            const res = await fetch(`${API_URL}/api/auth/login`, {
+            const res = await fetch(getApiUrl('/api/auth/login'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
