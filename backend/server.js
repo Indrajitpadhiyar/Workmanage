@@ -18,7 +18,7 @@ connectDB();
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  "https://workmanage-33e9.onrender.com", // frontend URL
+  "https://workmanage-33e9.onrender.com",
   "http://localhost:3000",
   "http://localhost:5173",
   "http://127.0.0.1:3000",
@@ -36,33 +36,13 @@ app.use(
 
       if (isAllowed) {
         return callback(null, true);
-      } else {
-        return callback(new Error(`CORS blocked for origin: ${origin}`));
       }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
-
-app.options(
-  "*",
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-
-      const isAllowed = allowedOrigins.some(
-        (o) => o.toLowerCase() === origin.toLowerCase(),
-      );
-
-      if (isAllowed) {
-        return callback(null, true);
-      } else {
-        return callback(new Error(`CORS blocked for origin: ${origin}`));
-      }
-    },
-    credentials: true,
   }),
 );
 
